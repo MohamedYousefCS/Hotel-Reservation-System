@@ -1,0 +1,88 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Registered Users";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+
+}
+
+
+<div class="container">
+
+    <h2>@ViewData["Title"]</h2>
+
+@*     <a href="@Url.Action("Dashboard", "Admin")" class="btn btn-custom mb-3">Back to Dashboard</a>
+ *@
+
+<table id="usersTable" class="display table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Address</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.Role</td>
+                 <td>@user.Address</td>
+                 <td>@user.Phone</td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
+
+<style>
+
+    .container {
+        margin: 40px;
+    }
+
+    .btn-custom {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-custom:focus {
+            outline: none;
+        }
+
+        h2{
+        margin-bottom: 12px;
+    }
+</style>
+
+<script> 
+ 
+        $(document).ready(function () {
+            $('#usersTable').DataTable();
+        });
+    </script>
+

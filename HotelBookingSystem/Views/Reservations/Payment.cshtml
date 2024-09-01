@@ -1,0 +1,97 @@
+﻿@* @model Reservation
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h2>Payment</h2>
+
+<div>
+    <h3>Reservation Details</h3>
+    <p><strong>Hotel:</strong> @Model.Room.Hotel.Name</p>
+    <p><strong>Room Type:</strong> @Model.Room.RoomType</p>
+    <p><strong>Price per Night:</strong> $@Model.Room.Price</p>
+    <p><strong>Total Price:</strong> $@Model.TotalPrice</p>
+
+    <form asp-action="CreateCheckoutSession" method="post">
+        <input type="hidden" name="reservationId" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+    </form>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+</div> *@
+
+
+
+@model Reservation
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/cart.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <section>
+            <div class="row d-flex justify-content-center align-items-center pb-5">
+                <div class="col-10 mb-5 mt-5 position-absolute top-0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fw-normal mb-0">Payment Details</h3>
+                    </div>
+
+                    <div class="card rounded-3 mb-4">
+                        <div class="card-body p-4">
+                            <div class="row d-flex justify-content-between align-items-center">
+
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <p class="lead fw-normal mb-2">@Model.Room.Hotel.Name</p>
+                                    <p><span class="text-muted">Room Type: </span>@Model.Room.RoomType</p>
+                                </div>
+                                <div class="col-md-3 col-lg-2 col-xl-2">
+                                    <h5 class="mb-0">$@Model.Room.Price per night</h5>
+                                </div>
+                                <div class="col-md-3 col-lg-2 col-xl-2">
+                                    <h5 class="mb-0">Total: $@Model.TotalPrice</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <form asp-action="CreateCheckoutSession" method="post">
+                        <input type="hidden" name="reservationId" value="@Model.Id" />
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-warning btn-block btn-lg">Proceed to Payment</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <div class="alert alert-danger mt-4">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

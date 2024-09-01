@@ -1,0 +1,41 @@
+﻿@model Reservation
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+<style>
+    .confirmContainer {
+        height: 100vh;
+    }
+    .box{
+        border: 1px solid;
+        padding: 25px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 15px;
+        box-shadow: 0 4px 18px 13px rgba(0, 0, 0, 0.1); 
+        backdrop-filter: blur(10px); 
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+</style>
+<div class="container confirmContainer d-flex justify-content-center align-items-center flex-column">
+    <div class="box">
+        <h2 class= "fs-2">Reservation Confirmation</h2>
+        <div>
+            <h3 class ="fs-4">Thank you for your payment!</h3>
+            <p>Your reservation has been successfully confirmed.</p>
+
+            <h4 class="fs-5">Reservation Details</h4>
+            <p><strong>Hotel:</strong> @Model.Room.Hotel.Name</p>
+            <p><strong>Room Type:</strong> @Model.Room.RoomType</p>
+            <p><strong>Check-in Date:</strong> @Model.CheckInDate.ToShortDateString()</p>
+            <p><strong>Check-out Date:</strong> @Model.CheckOutDate.ToShortDateString()</p>
+            <p><strong>Total Price:</strong> $@Model.TotalPrice</p>
+        </div>
+        
+        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Back to Home</a>
+        
+
+
+    </div>    
+</div>

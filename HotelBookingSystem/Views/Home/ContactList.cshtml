@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Contact> 
+
+
+@{
+    ViewData["Title"] = "Messages";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+
+<div class="table-data">
+    <div id="deleteAllContainer">
+    </div>
+    <div class="order">
+        <div class="head">
+            <h2>Messages</h2>
+            
+            <input class="inputs search" id="searchData" placeholder="Search" type="text">
+            <i id="s" class='bx bx-search'></i>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                @foreach (var contact in Model)
+                {
+                    <tr>
+                        <td>@contact.FullName</td>
+                        <td>@contact.Email</td>
+                        <td>@contact.Message</td>
+                        <td>@contact.CreatedAt.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>     
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchData').addEventListener('input', function () {
+        var searchQuery = this.value.toLowerCase();
+        var rows = document.querySelectorAll('#tbody tr');
+        rows.forEach(function (row) {
+            var name = row.children[0].innerText.toLowerCase();
+            var email = row.children[1].innerText.toLowerCase();
+            var message = row.children[2].innerText.toLowerCase();
+            if (name.includes(searchQuery) || email.includes(searchQuery) || message.includes(searchQuery)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>

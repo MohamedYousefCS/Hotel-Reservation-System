@@ -1,0 +1,67 @@
+﻿@model UserReservationsViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reservations</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/cart.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <section>
+            <div class="row d-flex justify-content-center align-items-center pb-5">
+                <div class="col-10 mb-5 mt-5 position-absolute top-0">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fw-normal mb-0">My Reservations</h3>
+                    </div>
+
+                    @if (Model.Reservations.Any())
+                    {
+                        @foreach (var reservation in Model.Reservations.Where(r => r.PaymentStatus != "Paid"))
+                        {
+                            <div class="card rounded-3 mb-4">
+                                <div class="card-body p-4">
+                                    <div class="row d-flex justify-content-between align-items-center">
+                                        <div class="col-md-3 col-lg-3 col-xl-3">
+                                            <p class="lead fw-normal mb-2">@reservation.Room?.RoomType</p>
+                                            <p><span class="text-muted">Hotel: </span>@reservation.Room?.Hotel?.Name</p>
+                                        </div>
+                                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                            <p><span class="text-muted">Check-In: </span>@reservation.CheckInDate.ToShortDateString()</p>
+                                            <p style="padding-left:10px"><span class="text-muted">Check-Out: </span>@reservation.CheckOutDate.ToShortDateString()</p>
+                                        </div>
+                                        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                            <h5 class="mb-0">@reservation.TotalPrice.ToString("C", new System.Globalization.CultureInfo("en-US"))</h5>
+                                        </div>
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                            <p class="text-success">@reservation.PaymentStatus</p>
+                                        </div>
+                                        <div class="col-md-2 col-lg-2 col-xl-2 text-end">
+                                            @if (reservation.PaymentStatus != "Paid")
+                                            {
+                                                <form asp-action="CreateCheckoutSession" method="post">
+                                                    <input type="hidden" name="reservationId" value="@reservation.Id" />
+                                                    <button type="submit" class="btn btn-warning btn-sm">Pay with Stripe</button>
+                                                </form>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No reservations found.</p>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

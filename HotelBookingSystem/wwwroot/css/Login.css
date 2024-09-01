@@ -1,0 +1,42 @@
+﻿/* "Shadows Into Light", cursive */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Shadows+Into+Light&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--darkTextColor);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:root {
+    --mainTextColor: #ececec;
+    --darkTextColor: #20252d;
+    --bgColor: #dbdbdb;
+}
+
+.box {
+    margin: 20px;
+    height: 75vh;
+}
+
+.login_container {
+    width: 400px;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid var(--bgColor);
+}
+
+.full-height-vh {
+    height: 100vh;
+}
+
+form p, form label {
+    color: var(--bgColor);
+}

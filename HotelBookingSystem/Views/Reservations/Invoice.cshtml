@@ -1,0 +1,23 @@
+﻿@model Reservation
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Invoice</h1>
+        <p><strong>Reservation ID:</strong> @Model.Id</p>
+        <p><strong>Hotel:</strong> @Model.Room.Hotel.Name</p>
+        <p><strong>Room:</strong> @Model.Room.RoomType</p>
+        <p><strong>Check-In:</strong> @Model.CheckInDate.ToShortDateString()</p>
+        <p><strong>Check-Out:</strong> @Model.CheckOutDate.ToShortDateString()</p>
+        <p><strong>Total Price:</strong> @Model.TotalPrice.ToString("C")</p>
+        <p><strong>Payment Status:</strong> @Model.PaymentStatus</p>
+    </div>
+</body>
+</html>

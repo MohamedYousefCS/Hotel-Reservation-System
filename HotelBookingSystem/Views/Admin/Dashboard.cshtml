@@ -1,0 +1,47 @@
+﻿ @model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="head-title">
+    <div class="left">
+        <h1>Dashboard</h1>
+        <ul class="breadcrumb">
+            <li><a href="@Url.Action("Index", "Admin")">Dashboard</a></li>
+            <li><i class='bx bx-chevron-right'></i></li>
+            <li><a class="active" href="#">Home</a></li>
+        </ul>
+    </div>
+</div>
+
+<ul class="box-info">
+    <li>
+        <i class='bx bx-hotel'></i>
+        <span class="text">
+            <h3>@Model.AvailableRoomsCount</h3>
+            <p>Available Rooms Count</p>
+        </span>
+    </li>
+    <li>
+        <i class='bx bxs-group'></i>
+        <span class="text">
+            <h3>@Model.RegisteredUsersCount</h3>
+            <p>Registered Users Count</p>
+        </span>
+    </li>
+    <li>
+        <i class='bx bx-hotel'></i>
+        <span class="text">
+            <h3>@Model.TotalHotelsCount</h3>
+            <p>Total Hotels Count</p>
+        </span>
+    </li>
+    <li>
+        <i class='bx bx-bed'></i>
+        <span class="text">
+            <h3>@Model.BookedRoomsCount</h3>
+            <p>Booked Rooms Count</p>
+        </span>
+    </li>
+</ul>

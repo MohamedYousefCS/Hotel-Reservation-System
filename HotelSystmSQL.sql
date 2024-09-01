@@ -1,0 +1,58 @@
+CREATE DATABASE HotelBookingSystem;
+
+USE HotelBookingSystem;
+
+
+CREATE TABLE Users (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL,
+    Role NVARCHAR(50) NOT NULL
+);
+CREATE TABLE Hotels (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(100) NOT NULL,
+    Location VARCHAR(100) NOT NULL,
+    Description TEXT
+);
+CREATE TABLE Rooms (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    HotelId INT NOT NULL,
+    RoomType VARCHAR(50) NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+	ImagePath nvarchar(255) NOT NULL,
+    AvailabilityStatus BIT DEFAULT 1,
+    FOREIGN KEY (HotelId) REFERENCES Hotels(Id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE Reservations (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT NOT NULL,
+    RoomId INT NOT NULL,
+    CheckInDate DATE NOT NULL,
+    CheckOutDate DATE NOT NULL,
+    TotalPrice DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE,
+    FOREIGN KEY (RoomId) REFERENCES Rooms(Id) ON DELETE CASCADE
+);
+CREATE TABLE Testimonials (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    UserId INT NOT NULL,
+    HotelId INT NOT NULL,
+    Content TEXT NOT NULL,
+    Rating INT CHECK (Rating >= 1 AND Rating <= 5),
+    FOREIGN KEY (UserId) REFERENCES Users(Id) ON DELETE CASCADE,
+    FOREIGN KEY (HotelId) REFERENCES Hotels(Id) ON DELETE CASCADE
+);
+CREATE TABLE Reports (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    AdminId INT NOT NULL,
+    ReportType NVARCHAR(50) NOT NULL,
+    GeneratedOn DATE NOT NULL,
+    FOREIGN KEY (AdminId) REFERENCES Users(Id) ON DELETE CASCADE
+);
+
+
+

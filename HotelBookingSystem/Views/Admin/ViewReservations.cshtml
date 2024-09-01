@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ReservationUsersViewModel>
+
+@{
+    ViewData["Title"] = "Reservations";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <table id="reservationsTable" class="display table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>Room ID</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+                <th>Total Price</th>
+                <th>Payment Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>@reservation.Id</td>
+                    <td>@reservation.UserName</td>
+                    <td>@reservation.RoomId</td>
+                    <td>@reservation.CheckInDate.ToString("yyyy-MM-dd")</td>
+                    <td>@reservation.CheckOutDate.ToString("yyyy-MM-dd")</td>
+                    <td>@reservation.TotalPrice.ToString("F2")</td>
+                    <td>@reservation.PaymentStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .container {
+        margin: 40px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('#reservationsTable').DataTable();
+    });
+</script>
