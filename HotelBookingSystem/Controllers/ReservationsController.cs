@@ -14,7 +14,7 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
-using Microsoft.AspNetCore.Mvc.Rendering; // تأكد من إضافة هذا التوجيه
+using Microsoft.AspNetCore.Mvc.Rendering; 
 
 
 
@@ -316,8 +316,8 @@ public async Task<IActionResult> ProcessPayment(int reservationId)
             try
             {
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Hotel Booking System", "mohamedyousefhoutar@gmail.com"));
-                message.To.Add(new MailboxAddress("Recipient Name", "mohamedyousefcs@gmail.com"));// Replace with recipient email
+                message.From.Add(new MailboxAddress("Hotel Booking System", "mohamed@gmail.com"));
+                message.To.Add(new MailboxAddress("Recipient Name", "mohamed@gmail.com"));// Replace with recipient email
                 message.Subject = "Your Reservation Invoice";
 
                 var bodyBuilder = new BodyBuilder
@@ -334,7 +334,7 @@ public async Task<IActionResult> ProcessPayment(int reservationId)
                 using (var client = new MailKit.Net.Smtp.SmtpClient())
                 {
                     await client.ConnectAsync("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                    await client.AuthenticateAsync("mohamedyousefhoutar@gmail.com", "Mohamed_12000");
+                    await client.AuthenticateAsync("mohamed@gmail.com", "12000");
                     await client.SendAsync(message);
                     await client.DisconnectAsync(true);
                 }

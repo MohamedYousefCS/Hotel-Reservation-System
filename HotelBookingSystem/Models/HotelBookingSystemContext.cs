@@ -29,10 +29,13 @@ public partial class HotelBookingSystemContext : DbContext
 
     public virtual DbSet<Contact> Contacts { get; set; }
 
+    public virtual DbSet<HotelRevenueReport> HotelRevenueReports { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=YOUSEF\\SQLEXPRESS;Initial Catalog=HotelBookingSystemDB;Integrated Security=True;Trust Server Certificate=True;Command Timeout=300");
+
+
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Data Source=YOUSEF\\SQLEXPRESS;Initial Catalog=HotelBookingSystemDB;Integrated Security=True;Trust Server Certificate=True;Command Timeout=300");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -75,12 +78,24 @@ public partial class HotelBookingSystemContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Testimonials).HasConstraintName("FK__Testimoni__UserI__571DF1D5");
         });
 
+
+
+
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07FC984A3E");
         });
 
         OnModelCreatingPartial(modelBuilder);
+
+
+
+
+
+        // تحديد HotelRevenueReport ككيان ليس له مفتاح أساسي
+        modelBuilder.Entity<HotelRevenueReport>()
+            .HasNoKey();
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

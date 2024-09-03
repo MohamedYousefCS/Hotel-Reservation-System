@@ -20,6 +20,9 @@ namespace HotelBookingSystem
 
             // Register services in the container
             builder.Services.AddScoped<IViewRenderService, ViewRenderService>();
+
+            builder.Services.AddScoped<ReportService>();
+
             builder.Services.AddHttpContextAccessor(); // Add this line if you haven't already
 
 

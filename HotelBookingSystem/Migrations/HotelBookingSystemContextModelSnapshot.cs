@@ -51,7 +51,7 @@ namespace HotelBookingSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contacts", (string)null);
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.Hotel", b =>
@@ -81,7 +81,26 @@ namespace HotelBookingSystem.Migrations
                     b.HasKey("Id")
                         .HasName("PK__Hotels__3214EC07714D0882");
 
-                    b.ToTable("Hotels", (string)null);
+                    b.ToTable("Hotels");
+                });
+
+            modelBuilder.Entity("HotelBookingSystem.Models.HotelRevenueReport", b =>
+                {
+                    b.Property<string>("HotelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalBookings")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalRevenue")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.ToTable("HotelRevenueReports");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.Report", b =>
@@ -108,7 +127,7 @@ namespace HotelBookingSystem.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Reports", (string)null);
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.Reservation", b =>
@@ -145,7 +164,7 @@ namespace HotelBookingSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations", (string)null);
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.Room", b =>
@@ -183,7 +202,7 @@ namespace HotelBookingSystem.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Rooms", (string)null);
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.Testimonial", b =>
@@ -214,7 +233,7 @@ namespace HotelBookingSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Testimonials", (string)null);
+                    b.ToTable("Testimonials");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.User", b =>
@@ -262,7 +281,7 @@ namespace HotelBookingSystem.Migrations
                     b.HasIndex(new[] { "Email" }, "UQ__Users__A9D10534ECAE0B43")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Models.Report", b =>
